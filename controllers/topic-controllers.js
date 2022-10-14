@@ -51,7 +51,7 @@ const updateTopic = async (req, res) => {
         filterObject.createdBy = userId
     }
     
-    const topic = await Topic.findOneAndUpdate(filterObject, {name})
+    const topic = await Topic.findOneAndUpdate(filterObject, {name}, {new:true, runValidators:true})
    
     if(!topic)
     {

@@ -44,7 +44,7 @@ const getPosts = async (req, res) => {
 
 const updatePost = async (req, res) => {
 
-    const {role} = req.user
+    const {role, userId} = req.user
     const id = req.params.id
     const filterObject = {}
     filterObject._id = id
@@ -54,7 +54,7 @@ const updatePost = async (req, res) => {
         filterObject.createdBy = userId
     }
 
-    const post = await Post.findOneAndUpdate(filterObject, req.body)
+    const post = await Post.findOneAndUpdate(filterObject, req.body, {new:true, runValidators:true})
 
     if(!post)
     {
@@ -67,7 +67,7 @@ const updatePost = async (req, res) => {
 
 const deletePost = async (req, res) => {
 
-    const {role} = req.user
+    const {role, userId} = req.user
     const id = req.params.id
     const filterObject = {}
     filterObject._id = id
