@@ -9,6 +9,7 @@ const errorHandlerMiddleware = require('./middleware/error-handler')
 const authRouter = require('./routes/auth-router')
 const userRouter = require('./routes/user-router')
 const topicRouter = require('./routes/topic-router')
+const postRouter = require('./routes/post-router')
 const authMiddleware = require('./middleware/authentication')
 const isAdminMiddleware = require('./middleware/is-admin')
 
@@ -21,6 +22,7 @@ app.get('/', (req, res) => {
 app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/users', authMiddleware, isAdminMiddleware, userRouter)
 app.use('/api/v1/topics', authMiddleware, topicRouter)
+app.use('/api/v1/posts', authMiddleware, postRouter)
 
 
 app.use(notFoundMiddleware);
