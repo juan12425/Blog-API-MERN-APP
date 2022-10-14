@@ -20,6 +20,8 @@ app.get('/', (req, res) => {
 
 app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/users', authMiddleware, isAdminMiddleware, userRouter)
+app.use('/api/v1/topics', authMiddleware, topicRouter)
+
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
