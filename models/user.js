@@ -23,6 +23,10 @@ const UserSchema = new mongoose.Schema({
     required: [true, 'Please provide password'],
     minlength: 6,
   },
+  role: {
+    type: String,
+    default: 'client'
+  }
 })
 
 UserSchema.pre('save', async function () {
