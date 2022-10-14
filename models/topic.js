@@ -3,7 +3,6 @@ const mongoose = require('mongoose')
 const TopicSchema = new mongoose.Schema({
     name: {
         required: [true, 'Please provide a topic name'],
-        minLength: 2,
         maxLength: 20
     },
     createdBy: {
@@ -11,6 +10,6 @@ const TopicSchema = new mongoose.Schema({
         ref: 'User',
         required: [true, 'Please provide a user']
     }
-})
+}, {timestamps: true})
 
 module.exports = mongoose.model('Topic', TopicSchema)

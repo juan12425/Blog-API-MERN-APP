@@ -4,7 +4,6 @@ const PostSchema = new mongoose.Schema({
     name:{
         type: String,
         required: [true, 'Please provide a post name'],
-        minLength: 1,
         maxLength: 100
     },
     text: {
@@ -22,6 +21,6 @@ const PostSchema = new mongoose.Schema({
         ref: 'Topic',
         required: [true, 'Please provide a related topic id']
     }
-})
+}, {timestamps: true})
 
 module.exports = mongoose.model('Post', PostSchema)
