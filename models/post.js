@@ -17,7 +17,7 @@ const PostSchema = new mongoose.Schema({
         required: [true, 'Please provide a user']
     },
     relatedTopic: {
-        type: mongoose.Types.ObjectID,
+        type: mongoose.Types.ObjectId,
         ref: 'Topic',
         required: [true, 'Please provide a related topic id']
     }
