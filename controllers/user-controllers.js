@@ -5,6 +5,12 @@ const {NotFoundError, UnauthorizedError, BadRequestError} = require('../errors')
 const getUser = async (req, res) => {
     const userId = req.params.id
     const user = await User.findOne({_id:userId})
+    
+    if(!user)
+    {
+        throw new BadRequestError(`Could not find user with id ${userId}`)
+    }
+
     const {id, role, email} = user 
     res.status(StatusCodes.OK).json({id, role, email})
 }
