@@ -1,5 +1,5 @@
 const Topic = require('../models/topic')
-//const Post = require('../models/post')
+const Post = require('../models/post')
 const {StatusCodes} = require('http-status-codes')
 const {BadRequestError} = require('../errors')
 
@@ -62,8 +62,30 @@ const updateTopic = async (req, res) => {
 
 }
 
+const deleteTopic = async (req,res) => {
+    
+    const {role} = req.user.role
+
+    if(role == 'client')
+    {
+        throw new BadRequestError('Sorry, you must be an admin or moderator to delete topics')
+    }
+
+    const topic = await Topic.findOneAndRemove({_id: req.params.id})
+
+    if(!topic)
+    {
+        throw new BadRequestError('Sorry, the topic was not found')
+    }
+
+    await Post.deleteMany({relatedTopic: req.params.id})
+
+    res.status(StatusCodes.OK).json({msg: 'Topic and related posts were successfully deleted'})
+}
+
 module.exports = {
     createTopic,
     getTopics,
-    updateTopic
+    updateTopic,
+    deleteTopic
 }
