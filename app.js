@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 }); 
 
 app.use('/api/v1/auth', authRouter)
-app.use('api/v1/users', authMiddleware, userRouter)
+app.use('/api/v1/users', authMiddleware, userRouter)
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);

@@ -30,13 +30,14 @@ const login = async (req, res) => {
         throw new NotFoundError('User could not be found')
     }
     
-    if(!user.compare(password))
+    if(!user.comparePassword(password))
     {
         throw new UnauthorizedError('Not authorized')
     }
 
+    const token = user.createJWT()
 
-    res.send('User logged successfully')
+    res.send({token})
 }
 
 module.exports = {
