@@ -25,7 +25,7 @@ const login = async (req, res) => {
     }
     
     const user = await User.findOne({email})
-    
+
     if(!user)
     {
         throw new NotFoundError('User could not be found')
@@ -38,7 +38,7 @@ const login = async (req, res) => {
 
     const token = user.createJWT()
 
-    res.status(StatusCodes.CREATED).send({token})
+    res.status(StatusCodes.OK).json({token})
 }
 
 module.exports = {
