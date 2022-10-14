@@ -12,7 +12,7 @@ const PostSchema = new mongoose.Schema({
         minLength: 10
     },
     createdBy: {
-        type: mongoose.Types.ObjectID,
+        type: mongoose.Types.ObjectId,
         ref: 'User',
         required: [true, 'Please provide a user']
     },

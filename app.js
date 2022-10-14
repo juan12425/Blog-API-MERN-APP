@@ -8,6 +8,7 @@ const notFoundMiddleware = require('./middleware/not-found')
 const errorHandlerMiddleware = require('./middleware/error-handler')
 const authRouter = require('./routes/auth-router')
 const userRouter = require('./routes/user-router')
+const topicRouter = require('./routes/topic-router')
 const authMiddleware = require('./middleware/authentication')
 const isAdminMiddleware = require('./middleware/is-admin')
 
