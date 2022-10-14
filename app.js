@@ -7,6 +7,8 @@ const connectDB = require('./db/connect')
 const notFoundMiddleware = require('./middleware/not-found')
 const errorHandlerMiddleware = require('./middleware/error-handler')
 const authRouter = require('./routes/auth-router')
+const userRouter = require('./routes/user-router')
+const authMiddleware = require('./middleware/authentication')
 
 app.use(express.json())
 
@@ -15,6 +17,7 @@ app.get('/', (req, res) => {
 }); 
 
 app.use('/api/v1/auth', authRouter)
+app.use('api/v1/users', authMiddleware, userRouter)
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
