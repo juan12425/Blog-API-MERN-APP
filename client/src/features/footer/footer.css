@@ -2,6 +2,7 @@
     background: black;
     color: white;
     padding: 4rem 0;
+    position: relative;
 }
 
 #footer h3{

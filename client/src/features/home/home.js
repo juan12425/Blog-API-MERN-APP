@@ -1,6 +1,5 @@
 import './home.css'
 import {Link} from 'react-router-dom'
-import {Footer} from '../footer/footer'
 
 export function Home(){
     return(
@@ -18,7 +17,6 @@ export function Home(){
                 <Link className="link-home" to="/register">Register</Link>
                 <Link className="link-home" to="/login">Login</Link>
             </div>
-            <Footer />
         </div>
     )
 }
