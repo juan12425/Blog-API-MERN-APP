@@ -16,9 +16,10 @@ ul{
 
 a{
     text-decoration: none;
-    color: #0040ff;
+    color: #1e1431;
     font-size: 1rem;
     transition: font-size 1s;
+    font-weight: 500;
 }
 
 a:hover{
