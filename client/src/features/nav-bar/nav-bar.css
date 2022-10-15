@@ -1,0 +1,26 @@
+
+div {
+    background: #ffd11c;
+    padding: 0.5rem 0;
+}
+
+ul{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    list-style: none;
+    height: 2rem;
+    background: white;
+    padding: 0.5rem 0; 
+}
+
+a{
+    text-decoration: none;
+    color: #0040ff;
+    font-size: 1rem;
+    transition: font-size 1s;
+}
+
+a:hover{
+    font-size: 1.2rem;
+}
