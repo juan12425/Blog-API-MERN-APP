@@ -9,8 +9,31 @@ const fetchUser = async  ({email, password}) => {
                 'Content-Type': 'application/json'
             },
             body:JSON.stringify({
-                "email": email,
-                "password": password
+                email,
+                password
+            })
+        })
+        
+        return await response.json()
+        
+    }catch(error)
+    {
+        console.log(error)
+    }
+}
+
+const createUser = async ({name, email, username, password}) => {
+    try{
+        const response = await fetch('/api/v1/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({
+                name,
+                email,
+                username,
+                password
             })
         })
         
@@ -26,13 +49,17 @@ const initialState = {
     userInfo: JSON.parse(localStorage.getItem('userInfo')) || {
         email: null,
         username: null,
+        role: null,
         token: null
     },
     auth: localStorage.getItem('auth') || false,
-    errorMsg: localStorage.getItem('errorMsg') || null
+    errorMsg: localStorage.getItem('errorMsg') || null,
+    errorMsgRegister: localStorage.getItem('errorMsgRegister') || null
+
 }
 
 export const logUser = createAsyncThunk('user/logUser', fetchUser)
+export const registerUser = createAsyncThunk('user/register', createUser)
 
 const userSlice = createSlice({
     name: 'user',
@@ -40,22 +67,26 @@ const userSlice = createSlice({
     reducers:{
         resetErrorMsg: (state, action) => {
             state.errorMsg = null
+        },
+        resetErrorMsgRegister: (state, action) => {
+            state.errorMsgRegister = null
         }
     },
     extraReducers: (builder) => {
         builder.addCase(logUser.fulfilled, (state, action)=>{
-            const {token, email, username, msg} = action.payload
+            const {token, email, username, role, msg} = action.payload
             if(token)
             {
                 state.userInfo = {
-                    email, username, token
+                    email, username, token, role
                 }
                 state.auth = true
 
                 localStorage.setItem('userInfo', JSON.stringify({
                     email,
                     username,
-                    token
+                    token,
+                    role
                 }))
 
                 localStorage.setItem('auth', true)
@@ -77,22 +108,44 @@ const userSlice = createSlice({
                 state.errorMsg = 'Sorry, there was an error try again later'
                 localStorage.setItem('errorMsg', 'Sorry, there was an error try again later')
             }
+
+        }).addCase(registerUser.fulfilled, (state,action) => {
+            const {token, email, username, role, msg} = action.payload
+
+            if(token)
+            {
+                state.userInfo = {
+                    email, username, token, role
+                }
+                state.auth = true
+
+                localStorage.setItem('userInfo', JSON.stringify({
+                    email,
+                    username,
+                    token,
+                    role
+                }))
+
+                localStorage.setItem('auth', true)
+                
+                return
+            }
+
+            state.errorMsgRegister = msg
+            localStorage.setItem('errorMsgRegister', msg)
         })
     }
 })
 
-export const selectErrorMsg = (state) => {
-    return state.user.errorMsg 
-}
+export const selectErrorMsg = (state) => state.user.errorMsg 
 
-export const selectUserInfo = (state) => {
-    return state.user.userInfo
-}
+export const selectUserInfo = (state) => state.user.userInfo
 
-export const selectAuth = (state) => {
-    return state.user.auth
-}
+export const selectAuth = (state) => state.user.auth
 
-export const {resetErrorMsg} = userSlice.actions
+export const selectErrorMsgRegister = (state) => state.user.errorMsgRegister
+
+
+export const {resetErrorMsg, resetErrorMsgRegister} = userSlice.actions
 
 export default userSlice.reducer
