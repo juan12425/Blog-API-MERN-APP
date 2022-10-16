@@ -42,3 +42,7 @@ button{
     color: white;
     font-size: 1rem;
 }
+
+#error-msg{
+    margin-left: 10px;
+}

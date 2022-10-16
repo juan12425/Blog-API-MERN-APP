@@ -1,4 +1,4 @@
-import {createAsyncThunk, createSlice, createEntityAdapter} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 
 
 const fetchUser = async  ({email, password}) => {
@@ -23,9 +23,11 @@ const fetchUser = async  ({email, password}) => {
 }
 
 const initialState = {
-    email: null,
-    username: null,
-    token: null,
+    userInfo: {
+        email: null,
+        username: null,
+        token: null,
+    },
     auth: false,
     errorMsg: null
 }
@@ -35,15 +37,20 @@ export const logUser = createAsyncThunk('user/logUser', fetchUser)
 const userSlice = createSlice({
     name: 'user',
     initialState,
+    reducers:{
+        resetErrorMsg: (state, action) => {
+            state.errorMsg = null
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(logUser.fulfilled, (state, action)=>{
             const {token, email, username, msg} = action.payload
             if(token)
             {
-                state.token = token
+                state.userInfo.token = token
+                state.userInfo.email = email
+                state.userInfo.username = username
                 state.auth = true
-                state.email = email
-                state.username = username
                 
                 return
             }
@@ -63,5 +70,18 @@ const userSlice = createSlice({
     }
 })
 
+export const selectErrorMsg = (state) => {
+    return state.user.errorMsg 
+}
+
+export const selectUserInfo = (state) => {
+    return state.user.userInfo
+}
+
+export const selectAuth = (state) => {
+    return state.user.auth
+}
+
+export const {resetErrorMsg} = userSlice.actions
 
 export default userSlice.reducer
