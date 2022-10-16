@@ -23,13 +23,13 @@ const fetchUser = async  ({email, password}) => {
 }
 
 const initialState = {
-    userInfo: {
+    userInfo: JSON.parse(localStorage.getItem('userInfo')) || {
         email: null,
         username: null,
-        token: null,
+        token: null
     },
-    auth: false,
-    errorMsg: null
+    auth: localStorage.getItem('auth') || false,
+    errorMsg: localStorage.getItem('errorMsg') || null
 }
 
 export const logUser = createAsyncThunk('user/logUser', fetchUser)
@@ -47,10 +47,18 @@ const userSlice = createSlice({
             const {token, email, username, msg} = action.payload
             if(token)
             {
-                state.userInfo.token = token
-                state.userInfo.email = email
-                state.userInfo.username = username
+                state.userInfo = {
+                    email, username, token
+                }
                 state.auth = true
+
+                localStorage.setItem('userInfo', JSON.stringify({
+                    email,
+                    username,
+                    token
+                }))
+
+                localStorage.setItem('auth', true)
                 
                 return
             }
@@ -58,13 +66,16 @@ const userSlice = createSlice({
             if(msg === 'Not authorized')
             {
                 state.errorMsg = 'Password is invalid'
+                localStorage.setItem('errorMsg', 'Password is invalid')
             }
             else if(msg === 'User could not be found')
             {
                 state.errorMsg = 'The user does not exist'
+                localStorage.setItem('errorMsg', 'The user does not exist')
             }
             else{
                 state.errorMsg = 'Sorry, there was an error try again later'
+                localStorage.setItem('errorMsg', 'Sorry, there was an error try again later')
             }
         })
     }

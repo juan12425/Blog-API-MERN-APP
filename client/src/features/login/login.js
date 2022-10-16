@@ -2,7 +2,7 @@ import './login.css'
 import {useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {logUser, selectAuth, selectErrorMsg, resetErrorMsg} from '../user/user-slice'
-
+import { Navigate } from 'react-router-dom';
 export function Login(props){
     
     const dispatch = useDispatch()
@@ -11,7 +11,6 @@ export function Login(props){
     
     const errorMsg = useSelector(selectErrorMsg)
     const auth = useSelector(selectAuth)
-
 
     const handleChange = (event) => {
         const {value, name} = event.target
@@ -35,8 +34,9 @@ export function Login(props){
     }
 
     return(<div>
-        <div id="form-div" onSubmit={handleSubmit}>
-            <form>
+        <div id="form-div">
+            {auth && <Navigate to="/resources" />}
+            <form onSubmit={handleSubmit}>
                 <h1>The Tech Blog Login</h1>
                 <input type="email" placeholder="Email" value={email} name="email" onChange={handleChange} required/>
                 <input type="password" placeholder="Password"  value={password} name="password" onChange={handleChange} required/>

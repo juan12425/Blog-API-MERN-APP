@@ -5,6 +5,8 @@ import {Layout} from './features/layout/layout'
 import {Home} from './features/home/home'
 import {Register} from './features/register/register'
 import {Login} from './features/login/login'
+import {Dashboard} from './features/dashboard/dashboard'
+import {LayoutLogged} from './features/layout/layout-logged'
 
 function App() {
   
@@ -15,6 +17,10 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/register" element={<Register/>} />
           <Route path="/login" element={<Login/>} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
+        <Route path="/resources" element={<LayoutLogged/>} >
+
         </Route>
       </Routes>
     </BrowserRouter>
