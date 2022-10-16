@@ -60,10 +60,11 @@
     background: #1caaff;
     padding: 2rem 0;
     height: 2.5rem;
+    align-items: center;
 }
 
 .link-home{
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 .link-home:hover{

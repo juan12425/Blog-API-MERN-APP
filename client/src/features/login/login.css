@@ -1,0 +1,44 @@
+#form-div{
+    width: 50%;
+    height: 80vh;
+    background: #1e1431;
+    margin: 2rem auto;
+    display: flex;
+    align-items: stretch;
+    border-radius: 10px;    
+
+}
+
+#form-div form{
+    width: 80%;
+    margin: 2rem auto;
+    background: white;
+    border-radius: 10px;
+    display: flex;
+    align-content: center;
+    row-gap: 10px;
+    flex-wrap: wrap;
+    border-radius: 10px;
+}
+ 
+
+form input, form button{
+    width: 90%;
+    margin: 0 auto;
+    border-radius: 10px;
+    height: 30px;
+    border: 1px solid gray;
+}
+
+form h1{
+    margin-left: 1rem;
+    font-size: 2rem;
+
+}
+
+button{
+    background: black;
+    border: none;
+    color: white;
+    font-size: 1rem;
+}
