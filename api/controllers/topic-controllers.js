@@ -73,7 +73,7 @@ const deleteTopic = async (req,res) => {
         throw new BadRequestError('Sorry, the topic was not found')
     }
 
-    if(role == 'client' || topic.createdBy != req.user.userId)
+    if(role == 'client' || (role == 'client' && topic.createdBy != req.user.userId))
     {
         throw new BadRequestError('Sorry, you must be an admin or moderator to delete topics of other users')
     }

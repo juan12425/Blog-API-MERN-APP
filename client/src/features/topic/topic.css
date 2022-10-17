@@ -24,3 +24,7 @@
 .delete{
     color: red;
 }
+
+.modify-input{
+    border-color: #e8e8e8;
+}

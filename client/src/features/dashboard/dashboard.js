@@ -9,7 +9,7 @@ export function Dashboard(){
     
     const token = useSelector(selectUserInfo).token
     const userId = useSelector(selectUserInfo).id
-    const [topics, setTopics] = useState([{_id: 'adds', name:'mock', createdBy:'Juan'}])
+    const [topics, setTopics] = useState([])
     const [newTopic, setNewTopic] = useState('')
     const getTopics = async (queryString = '') => {
         try {
@@ -64,15 +64,16 @@ export function Dashboard(){
     const handleSubmitNewTopic = (event) => {
         event.preventDefault()
         createNewTopic(newTopic).then(response => {
-            console.log(response)
-            setTopics((prevTopics) => [...prevTopics, response.topic])
+            if(response.topic)
+            {
+                setTopics((prevTopics) => [...prevTopics, response.topic])
+            }
         })
         setNewTopic('')
     }
 
     useEffect(()=>{
         getTopics().then(response => {
-            console.log(response)
             setTopics(response.topics)
         })
     }, [])
