@@ -64,12 +64,6 @@ const updateTopic = async (req, res) => {
 
 const deleteTopic = async (req,res) => {
     
-    const {role} = req.user.role
-
-    if(role == 'client')
-    {
-        throw new BadRequestError('Sorry, you must be an admin or moderator to delete topics')
-    }
 
     const topic = await Topic.findOneAndRemove({_id: req.params.id})
 
