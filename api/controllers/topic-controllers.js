@@ -64,13 +64,22 @@ const updateTopic = async (req, res) => {
 
 const deleteTopic = async (req,res) => {
     
-
-    const topic = await Topic.findOneAndRemove({_id: req.params.id})
-
+    const {role} = req.user.userId
+    
+    const topic = await Topic.findOne({_id: req.params.id})
+    
     if(!topic)
     {
         throw new BadRequestError('Sorry, the topic was not found')
     }
+
+    if(role == 'client' || topic.createdBy != req.user.userId)
+    {
+        throw new BadRequestError('Sorry, you must be an admin or moderator to delete topics of other users')
+    }
+    
+    await Topic.findOneAndRemove({_id: req.params.id})
+    
 
     await Post.deleteMany({relatedTopic: req.params.id})
 

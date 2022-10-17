@@ -8,6 +8,7 @@ import { Topic } from '../topic/topic'
 export function Dashboard(){
     
     const token = useSelector(selectUserInfo).token
+    const userId = useSelector(selectUserInfo).id
     const [topics, setTopics] = useState([{_id: 'adds', name:'mock', createdBy:'Juan'}])
     const [newTopic, setNewTopic] = useState('')
     const getTopics = async (queryString = '') => {
@@ -81,13 +82,13 @@ export function Dashboard(){
         <div id="create-new-topic">
             <button id='create-new-topic-button' onClick={handleClickNewTopic}>+ New Topic</button>
             <form id="form-new-topic" onSubmit={handleSubmitNewTopic} style={{display: 'none'}}>
-                <input type="text" placeholder="Enter a new topic name" value={newTopic} onChange={({target})=>setNewTopic(target.value)}/>
+                <input type="text" placeholder="Enter a new topic name" value={newTopic} onChange={({target})=>setNewTopic(target.value)} required/>
                 <button type="submit">Create a New Topic</button>
             </form>
         </div>  
         {topics.map((topic, index) => {
             const {_id, name, createdBy} = topic
-            return <Topic id={_id} name={name} createdBy={createdBy} key={index}/> 
+            return <Topic id={_id} name={name} createdBy={createdBy} userId={userId} key={index}/> 
         }).reverse()}
     </div>)
 }

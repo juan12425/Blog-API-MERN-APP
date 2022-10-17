@@ -10,3 +10,17 @@
 .topic:hover{
     padding: 1.5rem 1rem;
 }
+
+.topic-button{
+    margin-right: 1rem;
+    background: none;
+    border: none;
+}
+
+.modify{
+    color: blue;
+}
+
+.delete{
+    color: red;
+}
