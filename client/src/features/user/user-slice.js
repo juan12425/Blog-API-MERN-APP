@@ -50,7 +50,8 @@ const initialState = {
         email: null,
         username: null,
         role: null,
-        token: null
+        token: null,
+        id: null
     },
     auth: JSON.parse(localStorage.getItem('auth')) || false,
     errorMsg: localStorage.getItem('errorMsg') || null,
@@ -81,7 +82,9 @@ const userSlice = createSlice({
             state.userInfo = {email: null,
                 username: null,
                 role: null,
-                token: null}
+                token: null,
+                id: null
+            }
 
             state.auth = false
             state.errorMsg = null
@@ -90,11 +93,11 @@ const userSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(logUser.fulfilled, (state, action)=>{
-            const {token, email, username, role, msg} = action.payload
+            const {token, email, username, role, id, msg} = action.payload
             if(token)
             {
                 state.userInfo = {
-                    email, username, token, role
+                    email, username, token, role, id
                 }
                 state.auth = true
 
@@ -102,7 +105,8 @@ const userSlice = createSlice({
                     email,
                     username,
                     token,
-                    role
+                    role, 
+                    id
                 }))
 
                 localStorage.setItem('auth', true)
@@ -126,12 +130,12 @@ const userSlice = createSlice({
             }
 
         }).addCase(registerUser.fulfilled, (state,action) => {
-            const {token, email, username, role, msg} = action.payload
+            const {token, email, username, role, id, msg} = action.payload
 
             if(token)
             {
                 state.userInfo = {
-                    email, username, token, role
+                    email, username, token, role, id
                 }
                 state.auth = true
 
@@ -139,7 +143,8 @@ const userSlice = createSlice({
                     email,
                     username,
                     token,
-                    role
+                    role,
+                    id
                 }))
 
                 localStorage.setItem('auth', JSON.stringify(true))
