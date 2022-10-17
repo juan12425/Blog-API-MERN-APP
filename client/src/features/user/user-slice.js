@@ -74,10 +74,10 @@ const userSlice = createSlice({
         },
         logOut: (state, action) => {
             
-            localStorage.removeItem('userInfo', null)
-            localStorage.removeItem('auth', false)
-            localStorage.removeItem('errorMsg', null)
-            localStorage.removeItem('errorMsgRegister', null)
+            localStorage.removeItem('userInfo')
+            localStorage.removeItem('auth')
+            localStorage.removeItem('errorMsg')
+            localStorage.removeItem('errorMsgRegister')
             
             state.userInfo = {email: null,
                 username: null,
