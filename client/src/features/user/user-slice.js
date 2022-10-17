@@ -52,7 +52,7 @@ const initialState = {
         role: null,
         token: null
     },
-    auth: localStorage.getItem('auth') || false,
+    auth: JSON.parse(localStorage.getItem('auth')) || false,
     errorMsg: localStorage.getItem('errorMsg') || null,
     errorMsgRegister: localStorage.getItem('errorMsgRegister') || null
 
@@ -69,6 +69,22 @@ const userSlice = createSlice({
             state.errorMsg = null
         },
         resetErrorMsgRegister: (state, action) => {
+            state.errorMsgRegister = null
+        },
+        logOut: (state, action) => {
+            
+            localStorage.removeItem('userInfo', null)
+            localStorage.removeItem('auth', false)
+            localStorage.removeItem('errorMsg', null)
+            localStorage.removeItem('errorMsgRegister', null)
+            
+            state.userInfo = {email: null,
+                username: null,
+                role: null,
+                token: null}
+
+            state.auth = false
+            state.errorMsg = null
             state.errorMsgRegister = null
         }
     },
@@ -126,7 +142,7 @@ const userSlice = createSlice({
                     role
                 }))
 
-                localStorage.setItem('auth', true)
+                localStorage.setItem('auth', JSON.stringify(true))
                 
                 return
             }
@@ -146,6 +162,6 @@ export const selectAuth = (state) => state.user.auth
 export const selectErrorMsgRegister = (state) => state.user.errorMsgRegister
 
 
-export const {resetErrorMsg, resetErrorMsgRegister} = userSlice.actions
+export const {resetErrorMsg, resetErrorMsgRegister, logOut} = userSlice.actions
 
 export default userSlice.reducer

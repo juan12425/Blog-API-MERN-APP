@@ -7,6 +7,7 @@ import {Register} from './features/register/register'
 import {Login} from './features/login/login'
 import {Dashboard} from './features/dashboard/dashboard'
 import {LayoutLogged} from './features/layout/layout-logged'
+import {LogOut} from './features/log-out/log-out'
 
 function App() {
   
@@ -20,6 +21,7 @@ function App() {
         </Route>
         <Route path="/resources" element={<LayoutLogged/>} >
           <Route index element={<Dashboard />} />
+          <Route path="/resources/log-out" element={<LogOut />}/>
         </Route>
       </Routes>
     </BrowserRouter>
