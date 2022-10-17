@@ -1,6 +1,7 @@
+import './dashboard.css'
 
 export function Dashboard(){
-    return(<div>
+    return(<div id="dashboard">
         Here is your dashboard
     </div>)
 }

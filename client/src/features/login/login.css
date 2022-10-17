@@ -1,6 +1,6 @@
 #form-div{
     width: 50%;
-    height: 80vh;
+    min-height: 80vh;
     background: #1e1431;
     margin: 2rem auto;
     display: flex;
