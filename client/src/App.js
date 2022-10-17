@@ -1,6 +1,5 @@
 import React from 'react'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import './App.css'
 import {Layout} from './features/layout/layout'
 import {Home} from './features/home/home'
 import {Register} from './features/register/register'

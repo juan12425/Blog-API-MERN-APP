@@ -1,0 +1,12 @@
+.topic{
+    background: white;
+    color: black;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 10px;
+    transition: padding 1s;
+}
+
+.topic:hover{
+    padding: 1.5rem 1rem;
+}

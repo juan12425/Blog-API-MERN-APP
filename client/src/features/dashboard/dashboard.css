@@ -1,3 +1,29 @@
-#dashboard{
+#dash{
+    background: #1e1431;
+    color: white;
+    padding: 4rem 0;
+    width: 80%;
+    margin: 5rem auto;
     min-height: 100vh;
+    border-radius: 10px;
+}
+
+#dash h1{
+    margin: 1rem;
+}
+
+#create-new-topic-button{
+    border-radius: 10px;
+    margin: 1rem;
+    padding: 1rem;
+}
+
+#create-new-topic form{
+    margin: 1rem;
+    width: 50%;
+}
+
+#create-new-topic button{
+    border: none;
+    margin-top: 1rem;
 }
