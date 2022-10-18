@@ -28,3 +28,13 @@
 .modify-input{
     border-color: #e8e8e8;
 }
+
+.links-topics-posts{
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+.links-topics-posts:hover{
+    font-size: 1.5rem;
+}
+

@@ -2,6 +2,7 @@ import './topic.css'
 import { useState } from 'react'
 import {selectUserInfo} from '../user/user-slice'
 import { useSelector } from 'react-redux'
+import { Link } from "react-router-dom";
 
 export function Topic(props){
     const {id, createdBy, userId} = props 
@@ -82,7 +83,7 @@ export function Topic(props){
                 <form onSubmit={handleSubmitModify}> 
                     <input className="modify-input" type="text" value={newName} onChange={({target})=> setNewName(target.value)} placeholder="New name" required/>
                 </form> : 
-            <h2>{name}</h2>}
+            <h2><Link className="links-topics-posts" to={`/resources/posts?topic=${id}`}>{name}</Link></h2>}
 
             {(userId === createdBy || role !== 'client') && (<div>
                 <button className="topic-button modify" onClick={handleClickModify}>modify</button>
