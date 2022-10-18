@@ -39,7 +39,7 @@ const getPosts = async (req, res) => {
         throw new BadRequestError('Sorry, no posts were found')
     }
 
-    res.status(StatusCodes.OK).json(posts)
+    res.status(StatusCodes.OK).json({posts})
 }
 
 const updatePost = async (req, res) => {

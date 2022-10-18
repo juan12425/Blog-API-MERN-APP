@@ -7,7 +7,7 @@ import {Login} from './features/login/login'
 import {Dashboard} from './features/dashboard/dashboard'
 import {LayoutLogged} from './features/layout/layout-logged'
 import {LogOut} from './features/log-out/log-out'
-import {Post} from './features/post/post'
+import {Posts} from './features/posts/posts'
 import {Topics} from './features/topics/topics'
 
 function App() {
@@ -23,9 +23,9 @@ function App() {
         <Route path="/resources" element={<LayoutLogged/>} >
           <Route path="/resources/dashboard" element={<Dashboard />} >
             <Route index element={<Topics />}/>
+            <Route path="/resources/dashboard/posts" element={<Posts />}/>
           </Route>
           <Route path="/resources/log-out" element={<LogOut />}/>
-          <Route path="/resources/posts" element={<Post />}/>
         </Route>
       </Routes>
     </BrowserRouter>

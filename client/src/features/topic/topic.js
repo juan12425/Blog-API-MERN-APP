@@ -79,15 +79,15 @@ export function Topic(props){
         return
     }
     return(<div className="topic">
-            {modifying ? 
-                <form onSubmit={handleSubmitModify}> 
-                    <input className="modify-input" type="text" value={newName} onChange={({target})=> setNewName(target.value)} placeholder="New name" required/>
-                </form> : 
-            <h2><Link className="links-topics-posts" to={`/resources/posts?topic=${id}`}>{name}</Link></h2>}
+        {modifying ? 
+            <form onSubmit={handleSubmitModify}> 
+                <input className="modify-input" type="text" value={newName} onChange={({target})=> setNewName(target.value)} placeholder="New name" required/>
+            </form> : 
+        <h2><Link className="links-topics-posts" to={`/resources/dashboard/posts?topic=${id}`}>{name}</Link></h2>}
 
-            {(userId === createdBy || role !== 'client') && (<div>
-                <button className="topic-button modify" onClick={handleClickModify}>modify</button>
-                <button className="topic-button delete" onClick={handleClickDelete}>delete</button>
-            </div>)}
-        </div>)
+        {(userId === createdBy || role !== 'client') && (<div>
+            <button className="topic-button modify" onClick={handleClickModify}>modify</button>
+            <button className="topic-button delete" onClick={handleClickDelete}>delete</button>
+        </div>)}
+    </div>)
 }
