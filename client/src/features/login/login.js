@@ -35,7 +35,7 @@ export function Login(props){
 
     return(<div>
         <div id="form-div">
-            {auth && <Navigate to="/resources" />}
+            {auth && <Navigate to="/resources/dashboard" />}
             <form onSubmit={handleSubmit}>
                 <h1>The Tech Blog Login</h1>
                 <input type="email" placeholder="Email" value={email} name="email" onChange={handleChange} required/>

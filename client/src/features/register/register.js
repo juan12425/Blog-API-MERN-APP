@@ -54,7 +54,7 @@ export function Register(){
 
     return(<div>
         <div id="form-div">
-            {auth && <Navigate to="/resources" />}
+            {auth && <Navigate to="/resources/dashboard" />}
             <form onSubmit={handleSubmit}>
                 <h1>The Tech Blog Sign Up</h1>
                 <input type="text" placeholder="Name" value={name} name="name" onChange={handleChange} required/>
