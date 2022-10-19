@@ -1,0 +1,10 @@
+.display-post-text{
+    background: white;
+    width: 90%;
+    border-radius: 10px;
+    color: black;
+    line-height: 2;
+    font-size: 1rem;   
+    margin: 0 auto; 
+    padding: 1rem;
+}

@@ -14,7 +14,7 @@ const createPost = async (req, res) => {
 }
 
 const getPosts = async (req, res) => {
-    const {name, createdBy, relatedTopic} = req.query
+    const {name, createdBy, relatedTopic, id} = req.query
     const queryObject = {}
 
     if(name)
@@ -30,6 +30,11 @@ const getPosts = async (req, res) => {
     if(relatedTopic)
     {
         queryObject.relatedTopic = relatedTopic
+    }
+
+    if(id)
+    {
+        queryObject._id = id
     }
 
     const posts = await Post.find(queryObject)

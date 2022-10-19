@@ -9,6 +9,7 @@ import {LayoutLogged} from './features/layout/layout-logged'
 import {LogOut} from './features/log-out/log-out'
 import {Posts} from './features/posts/posts'
 import {Topics} from './features/topics/topics'
+import {DisplayPost} from './features/display-post/display-post'
 
 function App() {
   
@@ -24,6 +25,7 @@ function App() {
           <Route path="/resources/dashboard" element={<Dashboard />} >
             <Route index element={<Topics />}/>
             <Route path="/resources/dashboard/posts" element={<Posts />}/>
+            <Route path="/resources/dashboard/displaypost" element={<DisplayPost />}/>
           </Route>
           <Route path="/resources/log-out" element={<LogOut />}/>
         </Route>
