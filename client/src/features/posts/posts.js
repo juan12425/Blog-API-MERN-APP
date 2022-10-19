@@ -70,9 +70,9 @@ export function Posts(){
             </form>
         </div>  
 
-        {posts.map((topic, index) => {
-            const {_id, name, createdBy, createdAt} = topic
-            return <Post id={_id} name={name} createdBy={createdBy} userId={userId} createdAt={createdAt} key={index}/> 
+        {posts.map((post, index) => {
+            const {_id, name, createdBy, createdAt, username} = post
+            return <Post id={_id} name={name} createdBy={createdBy} userId={userId} createdAt={createdAt} username={username} key={index}/> 
         }).reverse()}
 
     </>)

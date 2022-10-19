@@ -6,6 +6,10 @@ const TopicSchema = new mongoose.Schema({
         required: [true, 'Please provide a topic name'],
         maxLength: 20
     },
+    username: {
+        type: String,
+        required: [true, 'Please provide a username'],
+    },
     createdBy: {
         type: mongoose.Types.ObjectId,
         ref: 'User',

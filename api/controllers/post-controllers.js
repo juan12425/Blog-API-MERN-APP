@@ -3,8 +3,8 @@ const {BadRequestError} = require('../errors')
 const {StatusCodes} = require('http-status-codes')
 
 const createPost = async (req, res) => {
-    const {userId} = req.user
-    const post = await Post.create({...req.body, createdBy: userId})
+    const {userId, username} = req.user
+    const post = await Post.create({...req.body, createdBy: userId, username})
     if(!post)
     {
         throw new BadRequestError('Sorry, there was an error while creating the post')

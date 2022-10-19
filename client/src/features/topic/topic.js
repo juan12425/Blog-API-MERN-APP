@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import {sendUpdate, sendDelete} from '../../crud/crud'
 
 export function Topic(props){
-    const {id, createdBy, userId, date} = props 
+    const {id, createdBy, userId, date, username} = props 
     const {token, role} = useSelector(selectUserInfo)
     const [deleted, setDeleted] = useState(false)
     const [modifying, setModifying] = useState(false)
@@ -58,6 +58,7 @@ export function Topic(props){
                 <input className="modify-input" type="text" value={newName} onChange={({target})=> setNewName(target.value)} placeholder="New name" required/>
             </form> : 
         <h2><Link className="links-topics-posts" to={`/resources/dashboard/posts?topic=${id}`}>{name}</Link></h2>}
+        <p>{username}</p>
         <p>{formatedDate}</p>
         {(userId === createdBy || role !== 'client') && (<div>
             <button className="topic-button modify" onClick={handleClickModify}>modify</button>
