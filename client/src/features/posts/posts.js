@@ -71,8 +71,8 @@ export function Posts(){
         </div>  
 
         {posts.map((topic, index) => {
-            const {_id, name, createdBy} = topic
-            return <Post id={_id} name={name} createdBy={createdBy} userId={userId} key={index}/> 
+            const {_id, name, createdBy, createdAt} = topic
+            return <Post id={_id} name={name} createdBy={createdBy} userId={userId} createdAt={createdAt} key={index}/> 
         }).reverse()}
 
     </>)
