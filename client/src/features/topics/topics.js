@@ -85,8 +85,8 @@ export function Topics(){
             </form>
         </div>  
         {topics.map((topic, index) => {
-            const {_id, name, createdBy} = topic
-            return <Topic id={_id} name={name} createdBy={createdBy} userId={userId} key={index}/> 
+            const {_id, name, createdBy, createdAt} = topic
+            return <Topic id={_id} name={name} createdBy={createdBy} userId={userId} date={createdAt} key={index}/> 
         }).reverse()}
     </>)
 }
