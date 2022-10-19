@@ -8,3 +8,11 @@
     margin: 0 auto; 
     padding: 1rem;
 }
+
+#display-posts{
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+    min-height: 100vh;
+}
+

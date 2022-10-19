@@ -38,7 +38,7 @@ export function DisplayPost(){
             }
         })
     }, [])
-    return(<div>
+    return(<div id="display-posts">
         <h1>{postName}</h1>
         <p className="display-post-text">{postText}</p>
     </div>)
