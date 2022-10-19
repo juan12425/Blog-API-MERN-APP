@@ -2,8 +2,8 @@ import {useEffect} from 'react'
 import { useSelector } from 'react-redux'
 import {selectUserInfo} from '../user/user-slice'
 import { useState } from 'react'
-import { Topic } from '../topic/topic'
 import { Post } from '../post/post'
+import {sendGet, sendPost} from '../../crud/crud'
 
 export function Posts(){
     
@@ -13,52 +13,25 @@ export function Posts(){
     const [posts, setPosts] = useState([])
     const [newPostName, setNewPostName] = useState('')
     const [newPostText, setNewPostText] = useState('')
-    const [topicId, setTopicId] = useState('')
 
     const getPosts = async (relatedTopic = '') => {
-        try {
-            if(token)
-            {
-                const response = await fetch(`/api/v1/posts?relatedTopic=${relatedTopic}`,{
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                })
-                const data = await response.json()
-                return data
-            }
-        } catch (error) {
-            console.log(error)
-        }
+        const response = await sendGet('posts', '', `relatedTopic=${relatedTopic}`, token)
+        return response
     }
 
     const createNewPost = async (postName, postText, relatedTopic) => {
-        
-        try {
-            const response = await fetch('/api/v1/posts', {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    name: postName,
-                    text: postText,
-                    relatedTopic: relatedTopicId
-                })
-            })
-            const data = await response.json()
-            return data
-
-        } catch (error) {
-            console.log(error)
-        }
+        const response = await sendPost('posts', '', '', {
+            name: postName,
+            text: postText,
+            relatedTopic
+        }, token) 
+        return response
     }
 
     const handleClickNewPost = () => {
         
         const newTopicButton = document.getElementById('form-new-topic')
-        if(newTopicButton.style.display == 'block')
+        if(newTopicButton.style.display === 'block')
         {
             newTopicButton.style.display = 'none'
             return
@@ -69,7 +42,7 @@ export function Posts(){
 
     const handleSubmitNewPost = (event) => {
         event.preventDefault()
-        createNewPost(newPostName, newPostText, topicId).then(response => {
+        createNewPost(newPostName, newPostText, relatedTopicId).then(response => {
             if(response.post)
             {
                 setPosts((prevPosts) => [...prevPosts, response.post])

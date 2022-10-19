@@ -3,54 +3,28 @@ import { useSelector } from 'react-redux'
 import {selectUserInfo} from '../user/user-slice'
 import { useState } from 'react'
 import { Topic } from '../topic/topic'
+import {sendGet, sendPost} from '../../crud/crud'
 
 export function Topics(){
     const token = useSelector(selectUserInfo).token
     const userId = useSelector(selectUserInfo).id
     const [topics, setTopics] = useState([])
     const [newTopic, setNewTopic] = useState('')
+    
     const getTopics = async (queryString = '') => {
-        try {
-            if(token)
-            {
-                const response = await fetch(`/api/v1/topics?${queryString}`,{
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                })
-                const data = await response.json()
-                return data
-            }
-        } catch (error) {
-            console.log(error)
-        }
+        const res = await sendGet('topics', '', queryString, token)
+        return res
     }
 
     const createNewTopic = async (topicName) => {
-        
-        try {
-            const response = await fetch('/api/v1/topics', {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    name: topicName
-                })
-            })
-            const data = await response.json()
-            return data
-
-        } catch (error) {
-            console.log(error)
-        }
+        const res = await sendPost('topics', '', '', {name: topicName}, token)
+        return res
     }
 
     const handleClickNewTopic = () => {
         
         const newTopicButton = document.getElementById('form-new-topic')
-        if(newTopicButton.style.display == 'block')
+        if(newTopicButton.style.display === 'block')
         {
             newTopicButton.style.display = 'none'
             return

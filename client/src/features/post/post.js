@@ -3,6 +3,7 @@ import { useState } from 'react'
 import {selectUserInfo} from '../user/user-slice'
 import { useSelector } from 'react-redux'
 import { Link } from "react-router-dom";
+import {sendDelete, sendUpdate} from '../../crud/crud'
 
 export function Post(props){
     const {id, createdBy, userId} = props 
@@ -13,40 +14,13 @@ export function Post(props){
     const [name, setName] = useState(props.name)
 
     const deletePost = async (id) => {
-        try {
-            const response = await fetch(`/api/v1/posts/${id}`, {
-                method: 'DELETE',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                }
-            })
-            
-            const data = await response.json()
-            return data
-
-        } catch (error) {
-            console.log(error)
-        }
+        const response = await sendDelete('posts', id, '', token)
+        return response
     }
 
     const updatePostName = async (id, name) => {
-        try {
-            const response = await fetch(`/api/v1/posts/${id}`, {
-                method: 'PATCH',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    name
-                })
-            })
-            const data = await response.json()
-            return data
-
-        } catch (error) {
-            console.log(error)
-        }
+        const response = await sendUpdate('posts', id, '', {name}, token)
+        return response
     }
 
     const handleClickDelete = () => {
@@ -65,7 +39,7 @@ export function Post(props){
     const handleSubmitModify = (event) => {
         event.preventDefault()
         updatePostName(id, newName).then(response => {
-            if(response.msg == 'Update was successful')
+            if(response.msg === 'Update was successful')
             {
                 setName(newName)
             }
