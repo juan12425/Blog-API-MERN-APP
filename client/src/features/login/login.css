@@ -28,6 +28,7 @@ form input, form button{
     border-radius: 10px;
     height: 30px;
     border: 1px solid gray;
+    display: block;
 }
 
 form h1{
