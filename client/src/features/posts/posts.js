@@ -2,7 +2,7 @@ import {useEffect} from 'react'
 import { useSelector } from 'react-redux'
 import {selectUserInfo} from '../user/user-slice'
 import { useState } from 'react'
-import { Post } from '../post/post'
+import { Post } from './post/post'
 import {sendGet, sendPost} from '../../crud/crud'
 
 export function Posts(){
@@ -59,8 +59,8 @@ export function Posts(){
         })
     }, [])
 
-    return(<><h1>Posts</h1>
-        
+    return(<>
+        <h1>Posts</h1>
         <div id="create-new-topic">
             <button id='create-new-topic-button' onClick={handleClickNewPost}>+ New Post</button>
             <form id="form-new-topic" onSubmit={handleSubmitNewPost} style={{display: 'none'}}>
@@ -71,9 +71,8 @@ export function Posts(){
         </div>  
 
         {posts.map((post, index) => {
-            const {_id, name, createdBy, createdAt, username} = post
-            return <Post id={_id} name={name} createdBy={createdBy} userId={userId} createdAt={createdAt} username={username} key={index}/> 
+            const {_id, name, createdBy, createdAt, username, text} = post
+            return <Post id={_id} name={name} createdBy={createdBy} userId={userId} createdAt={createdAt} username={username} text={text} key={index}/> 
         }).reverse()}
-
     </>)
 }

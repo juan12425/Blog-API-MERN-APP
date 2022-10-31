@@ -1,0 +1,10 @@
+.post-inner-text{
+    background: #f9f9f9;
+    margin-top: 2rem;
+    padding: 1rem;
+    border-radius: 10px
+}
+
+.post-info{
+    display: none;
+}
