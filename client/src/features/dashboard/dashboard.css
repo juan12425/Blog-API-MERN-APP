@@ -38,6 +38,16 @@ textarea{
     border: 1px solid gray;
 }
 
+textarea, #create-new-topic input {
+    padding: 0.2rem;
+    font-size: 1rem;
+    font-weight: 100;
+}
+
+textarea:focus{
+    outline: none;
+}
+
 #create-new-topic form > *{
     margin-bottom: 1rem;
     margin-top: 1rem;
