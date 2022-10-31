@@ -1,11 +1,12 @@
 #dash{
-    background: #1e1431;
-    color: white;
+    background: #fbfbfb;
+    color: black;
     padding: 4rem 0;
     width: 80%;
     margin: 5rem auto;
     min-height: 100vh;
     border-radius: 10px;
+    border: 1px #ececec solid;
 }
 
 #dash h1{

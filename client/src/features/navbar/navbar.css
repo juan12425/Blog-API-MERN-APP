@@ -14,7 +14,7 @@ ul{
     padding: 0.5rem 0; 
 }
 
-a{
+a, .button-display-post{
     text-decoration: none;
     color: #1e1431;
     font-size: 1rem;

@@ -55,7 +55,6 @@ export function Posts(){
     useEffect(()=>{
         getPosts(relatedTopicId).then(response => {
             setPosts(response.posts)
-            console.log(response)
         })
     }, [])
 

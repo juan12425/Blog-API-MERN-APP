@@ -30,6 +30,7 @@
 
 #blog-description p{
     display: block;
+    text-align: center;
 }
 
 #blog-description p >{
@@ -57,7 +58,7 @@
     display: flex;
     justify-content: space-evenly;
     margin: 5rem 0;
-    background: #1caaff;
+    background: #f7f7f7;
     padding: 2rem 0;
     height: 2.5rem;
     align-items: center;

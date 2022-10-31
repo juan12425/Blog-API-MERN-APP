@@ -5,6 +5,7 @@
     padding: 1rem;
     border-radius: 10px;
     transition: padding 1s;
+    border: 1px #eae9e9 solid;
 }
 
 .topic:hover{
@@ -18,11 +19,11 @@
 }
 
 .modify{
-    color: blue;
+    color:#0087ff;
 }
 
 .delete{
-    color: red;
+    color: #0087ff;
 }
 
 .modify-input{
@@ -39,3 +40,9 @@
     font-size: 1.5rem;
 }
 
+.confirm-edit{
+   background: none;
+   border: none;
+   width: auto; 
+   margin: 1rem 0;
+}

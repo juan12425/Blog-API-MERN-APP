@@ -2,7 +2,6 @@ import './post.css'
 import { useState } from 'react'
 import {selectUserInfo} from '../../user/user-slice'
 import { useSelector } from 'react-redux'
-import { Link } from "react-router-dom";
 import {sendDelete, sendUpdate} from '../../../crud/crud'
 
 export function Post(props){
@@ -45,7 +44,6 @@ export function Post(props){
                 setName(newName)
             }
         })
-        setNewName('')
         setModifying(false)
     }
 
@@ -54,12 +52,12 @@ export function Post(props){
     }
 
     const handleClickPostTitle = (id) => {
-        if(document.getElementById(id).style.display == 'none')
+        if(document.getElementById(id).style.display === 'block')
         {
-            document.getElementById(id).style.display = 'block'
+            document.getElementById(id).style.display = 'none'
         }
         else{
-            document.getElementById(id).style.display = 'none'
+            document.getElementById(id).style.display = 'block'
         }
     }
 
@@ -69,7 +67,7 @@ export function Post(props){
                 <form onSubmit={handleSubmitModify}> 
                     <input className="modify-input" type="text" value={newName} onChange={({target})=> setNewName(target.value)} placeholder="New name" required/>
                 </form> : 
-            <Link to="#" onClick={()=>handleClickPostTitle(id)}><h2>{name}</h2></Link>}
+            <h2 className="post-title" onClick={()=>handleClickPostTitle(id)}>{name}</h2>}
             <p>{username}</p>
             <p>{date}</p>
             <div id={id} className="post-info">
@@ -77,6 +75,7 @@ export function Post(props){
                     <button className="topic-button modify" onClick={handleClickModify}>modify</button>
                     <button className="topic-button delete" onClick={handleClickDelete}>delete</button>
                 </div>)}
+                <hr className="hr-post"/>
                 <p className="post-inner-text">{text}</p>
             </div>
         </div>
