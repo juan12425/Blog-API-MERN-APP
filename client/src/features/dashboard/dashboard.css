@@ -35,13 +35,14 @@ textarea{
     display: block;
     margin: 0 auto;
     border-radius: 10px;
-    border: 1px solid gray;
+    resize: none;
 }
 
 textarea, #create-new-topic input {
     padding: 0.2rem;
     font-size: 1rem;
     font-weight: 100;
+    border: 1px solid #e8e8e8;
 }
 
 textarea:focus{
