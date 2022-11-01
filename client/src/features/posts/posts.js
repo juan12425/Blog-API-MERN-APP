@@ -74,8 +74,12 @@ export function Posts(){
         </div>  
 
         {posts.map((post, index) => {
-            const {_id, name, createdBy, createdAt, username, text} = post
-            return <Post id={_id} name={name} createdBy={createdBy} userId={userId} createdAt={createdAt} username={username} text={text} key={index}/> 
+            const {_id, name, createdBy, createdAt, username, text, isReply} = post
+            if(isReply)
+            {
+                return
+            }
+            return <Post id={_id} name={name} createdBy={createdBy} userId={userId} createdAt={createdAt} username={username} text={text} relatedTopic={relatedTopicId} key={index}/> 
         }).reverse()}
     </>)
 }

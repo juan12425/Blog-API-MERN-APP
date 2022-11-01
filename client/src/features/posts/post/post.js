@@ -6,7 +6,7 @@ import {sendDelete, sendUpdate} from '../../../crud/crud'
 import {sendGet, sendPost} from '../../../crud/crud'
 
 export function Post(props){
-    const {id, createdBy, userId, createdAt, username} = props 
+    const {id, createdBy, userId, createdAt, username, relatedTopic} = props 
     const {token, role} = useSelector(selectUserInfo)
     const [deleted, setDeleted] = useState(false)
     const [modifying, setModifying] = useState(false)
@@ -62,13 +62,13 @@ export function Post(props){
         return
     }
 
-    const handleClickPostTitle = (idPostText) => {
-        if(document.getElementById(idPostText).style.display === 'block')
+    const handleClickPostTitle = (idFormReply) => {
+        if(document.getElementById(idFormReply).style.display === 'block')
         {
-            document.getElementById(idPostText).style.display = 'none'
+            document.getElementById(idFormReply).style.display = 'none'
         }
         else{
-            document.getElementById(idPostText).style.display = 'block'
+            document.getElementById(idFormReply).style.display = 'block'
 
             getReplies(id).then(response => {
                 if(response.posts){
@@ -78,12 +78,13 @@ export function Post(props){
         }
     }
 
-    const createNewReply = async (postName, postText, relatedPost, isReply) => {
+    const createNewReply = async (postName, postText, relatedPost, relatedTopic, isReply) => {
         const response = await sendPost('posts', '', '', {
             name: postName,
             text: postText,
             relatedPost,
-            isReply
+            isReply,
+            relatedTopic
 
         }, token) 
         return response
@@ -91,9 +92,10 @@ export function Post(props){
 
     const handleSubmitReply = (event) => {
         event.preventDefault()
-        createNewReply(`Reply to ${id}`, replyText, id, true).then(response => {
+        createNewReply(`Reply to ${id}`, replyText, id, relatedTopic, true).then(response => {
             if(response.post){
                 setReplies(prevReplies => [...prevReplies, response.post])
+                setReplyText('')
             }
         })
     }
@@ -101,6 +103,16 @@ export function Post(props){
     const handleChangeReplyText = ({target}) => {
         setReplyText(target.value)
     }
+
+    const handleDisplayFormReply = (idFormReply) => {
+        if(document.getElementById(idFormReply).style.display === 'block')
+        {
+            document.getElementById(idFormReply).style.display = 'none'
+        }
+        else{
+            document.getElementById(idFormReply).style.display = 'block'
+        }
+    } 
 
     return(
         <div className="topic">
@@ -129,15 +141,19 @@ export function Post(props){
                             <p>{text}</p>
                             
                             <div>
-                                <button>Reply</button>
-                                <form onSubmit={handleSubmitReply}>
-                                    <input value={replyText} onChange={handleChangeReplyText}/>
+                                <button className="add-reply-button" onClick={() => handleDisplayFormReply(`${id}-form`)}>+ Add Reply</button>
+                                <form id={`${id}-form`} className="reply-form" onSubmit={handleSubmitReply}>
+                                    <textarea className="textarea-reply" value={replyText} onChange={handleChangeReplyText}/>
+                                    <button className="modify confirm-edit" type="submit">Add reply</button>
                                 </form>
                             </div>
 
                             {replies.map((reply, index) => {
                                 const {text} = reply
-                                return <p key={index}>{text}</p>
+                                return (<div key={index}>
+                                        <hr className="hr-post"/>
+                                        <p className="reply-text">{text}</p>
+                                    </div>)
                             })}
                         </div>
                     </>
