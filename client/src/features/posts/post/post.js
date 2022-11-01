@@ -4,7 +4,6 @@ import {selectUserInfo} from '../../user/user-slice'
 import { useSelector } from 'react-redux'
 import {sendDelete, sendUpdate} from '../../../crud/crud'
 import {sendGet, sendPost} from '../../../crud/crud'
-import { Reply } from './reply'
 import { PostDisplay } from './post-display'
 
 export function Post(props){
