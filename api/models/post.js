@@ -4,12 +4,11 @@ const PostSchema = new mongoose.Schema({
     name:{
         type: String,
         required: [true, 'Please provide a post name'],
-        maxLength: 100
+        maxLength: 1000
     },
     text: {
         type: String,
         required: [true, 'Text cannot be empty'],
-        minLength: 10
     },
     createdBy: {
         type: mongoose.Types.ObjectId,

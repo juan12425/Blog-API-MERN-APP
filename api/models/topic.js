@@ -4,7 +4,7 @@ const TopicSchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, 'Please provide a topic name'],
-        maxLength: 20
+        maxLength: 1000
     },
     username: {
         type: String,
