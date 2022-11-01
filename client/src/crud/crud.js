@@ -1,24 +1,38 @@
+import {store} from '../app/store'
+import { logOut } from '../features/user/user-slice'
+
+const checkAuth =  (response) => {
+    const msg = response.msg
+    console.log(msg)
+    if(msg === 'Authentication invalid')
+    {
+        store.dispatch(logOut())
+    }
+}
 
 async function request(route, headers, method, params='', query='', body={}){
     try{
         const endpoint = `/api/v1/${route}/${params}?${query}`  
-        
+        let httpContent;
+
         if(method === 'GET')
         {
-            const response = await fetch(endpoint, {
+            httpContent = {
                 method,
                 headers
-            })
-            const data = await response.json()
-            return data
+            }
+        }
+        else{
+            httpContent = {
+                method,
+                headers,
+                body: JSON.stringify(body)
+            }
         }
 
-        const response = await fetch(endpoint, {
-            method,
-            headers,
-            body: JSON.stringify(body)
-        })
+        const response = await fetch(endpoint, httpContent)
         const data = await response.json()
+        checkAuth(data)
         return data
         
 
