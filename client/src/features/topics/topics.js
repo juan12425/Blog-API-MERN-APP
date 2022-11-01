@@ -2,8 +2,8 @@ import {useEffect} from 'react'
 import { useSelector } from 'react-redux'
 import {selectUserInfo} from '../user/user-slice'
 import { useState } from 'react'
-import { Topic } from '../topic/topic'
 import {sendGet, sendPost} from '../../crud/crud'
+import { TopicsDisplay } from './topics-display'
 
 export function Topics(){
     const token = useSelector(selectUserInfo).token
@@ -50,17 +50,13 @@ export function Topics(){
         })
     }, [])
 
-    return(<><h1>Topics</h1>
-        <div id="create-new-topic">
-            <button id='create-new-topic-button' onClick={handleClickNewTopic}>+ New Topic</button>
-            <form id="form-new-topic" onSubmit={handleSubmitNewTopic} style={{display: 'none'}}>
-                <input type="text" placeholder="Enter a new topic name" value={newTopic} onChange={({target})=>setNewTopic(target.value)} required/>
-                <button type="submit">Create a New Topic</button>
-            </form>
-        </div>  
-        {topics.map((topic, index) => {
-            const {_id, name, createdBy, createdAt, username} = topic
-            return <Topic id={_id} name={name} createdBy={createdBy} userId={userId} date={createdAt} username={username} key={index}/> 
-        }).reverse()}
-    </>)
+    return <TopicsDisplay topics={topics} 
+        functions={{
+            handleClickNewTopic,
+            handleSubmitNewTopic,
+            setNewTopic
+        }}
+        newTopic={newTopic}
+        userId={userId}
+    />
 }
