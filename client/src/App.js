@@ -10,6 +10,7 @@ import {LogOut} from './features/log-out/log-out'
 import {Posts} from './features/posts/posts'
 import {Topics} from './features/topics/topics'
 import {DisplayPost} from './features/display-post/display-post'
+import {Profile} from './features/profile/profile'
 
 function App() {
   
@@ -28,6 +29,7 @@ function App() {
             <Route path="/resources/dashboard/displaypost" element={<DisplayPost />}/>
           </Route>
           <Route path="/resources/log-out" element={<LogOut />}/>
+          <Route path="/resources/profile" element={<Profile />}/>
         </Route>
       </Routes>
     </BrowserRouter>
