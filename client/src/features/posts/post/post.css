@@ -12,11 +12,18 @@
     display: none;
 }
 
-.post-title{
+.cursor-pointer{
     cursor: pointer;
 }
 
 .textarea-modify-post{
     width: 100%;
     height: 50vh;
+}
+
+.display-post-link{
+    display: block;
+    background: none;
+    color: #584c84;
+    font-family: 'Montserrat', sans-serif;
 }

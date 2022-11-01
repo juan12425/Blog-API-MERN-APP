@@ -3,6 +3,7 @@ import { useState } from 'react'
 import {selectUserInfo} from '../../user/user-slice'
 import { useSelector } from 'react-redux'
 import {sendDelete, sendUpdate} from '../../../crud/crud'
+import { Link } from 'react-router-dom'
 
 export function Post(props){
     const {id, createdBy, userId, createdAt, username} = props 
@@ -71,7 +72,7 @@ export function Post(props){
                     <input className="modify-input" type="text" value={newName} onChange={({target})=> setNewName(target.value)} placeholder="New name" required/>
                     <button className="modify confirm-edit" type="submit">Confirm changes</button>
                 </form> : 
-            <h2 className="post-title" onClick={()=>handleClickPostTitle(id)}>{name}</h2>}
+            <button className="links-topics-posts cursor-pointer display-post-link" onClick={()=>handleClickPostTitle(id)}>{name}</button>}
             <p>{username}</p>
             <p>{date}</p>
             <div id={id} className="post-info">

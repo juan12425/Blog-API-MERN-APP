@@ -4,10 +4,14 @@ import {selectUserInfo} from '../user/user-slice'
 import { useState } from 'react'
 import { Post } from './post/post'
 import {sendGet, sendPost} from '../../crud/crud'
+import { useSearchParams } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 export function Posts(){
     
-    const relatedTopicId = window.location.href.split('topic=')[1]
+    const [searchParams, setSearchParams] = useSearchParams();
+    const relatedTopicId = searchParams.get("topic")
+    const topicName = searchParams.get("topicname")
     const token = useSelector(selectUserInfo).token
     const userId = useSelector(selectUserInfo).id
     const [posts, setPosts] = useState([])
@@ -59,7 +63,7 @@ export function Posts(){
     }, [])
 
     return(<>
-        <h1>Posts</h1>
+        <h1><NavLink to='../' className="topics-link">Topics</NavLink> / {topicName}</h1>
         <div id="create-new-topic">
             <button id='create-new-topic-button' onClick={handleClickNewPost}>+ New Post</button>
             <form id="form-new-topic" onSubmit={handleSubmitNewPost} style={{display: 'none'}}>

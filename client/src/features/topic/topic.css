@@ -31,7 +31,7 @@
     width: 100%;
 }
 
-.links-topics-posts{
+.links-topics-posts, .display-post-link{
     font-weight: 600;
     font-size: 1.5rem;
 }
@@ -45,4 +45,17 @@
    border: none;
    width: auto; 
    margin: 1rem 0;
+}
+
+.topics-link{
+    font-size: 1rem;
+}
+
+.topics-link{
+    font-size: 2rem;
+    color: black;
+}
+
+.topic > * {
+    margin-bottom: 0.5rem;
 }

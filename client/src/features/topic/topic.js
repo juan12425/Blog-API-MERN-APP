@@ -64,7 +64,7 @@ export function Topic(props){
                 <input className="modify-input" type="text" value={newName} onChange={({target})=> setNewName(target.value)} placeholder="New name" required/>
                 <button className="modify confirm-edit" type="submit">Confirm changes</button>
             </form> : 
-        <h2><Link className="links-topics-posts" to={`/resources/dashboard/posts?topic=${id}`}>{name}</Link></h2>}
+        <h2><Link className="links-topics-posts" to={`/resources/dashboard/posts?topic=${id}&topicname=${name}`}>{name}</Link></h2>}
         <p>{username}</p>
         <p>{formatedDate}</p>
         {(userId === createdBy || role !== 'client') && (<div>

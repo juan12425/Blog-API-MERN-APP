@@ -14,7 +14,7 @@ ul{
     padding: 0.5rem 0; 
 }
 
-a, .button-display-post{
+.link-nav, .button-display-post, .link-home{
     text-decoration: none;
     color: #1e1431;
     font-size: 1rem;
@@ -22,6 +22,11 @@ a, .button-display-post{
     font-weight: 500;
 }
 
-a:hover{
+.link-nav:hover{
     font-size: 1.2rem;
+}
+
+a{
+    color:#584c84;
+    text-decoration: none;
 }
