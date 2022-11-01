@@ -4,6 +4,7 @@ import {selectUserInfo} from '../../user/user-slice'
 import { useSelector } from 'react-redux'
 import {sendDelete, sendUpdate} from '../../../crud/crud'
 import {sendGet, sendPost} from '../../../crud/crud'
+import { Reply } from './reply'
 
 export function Post(props){
     const {id, createdBy, userId, createdAt, username, relatedTopic} = props 
@@ -23,7 +24,7 @@ export function Post(props){
         return response
     }
 
-    const updateName = async (id, name, text) => {
+    const updatePost = async (id, name, text) => {
         const response = await sendUpdate('posts', id, '', {name, text}, token)
         return response
     }
@@ -48,7 +49,7 @@ export function Post(props){
 
     const handleSubmitModify = (event) => {
         event.preventDefault()
-        updateName(id, newName, newText).then(response => {
+        updatePost(id, newName, newText).then(response => {
             if(response.msg === 'Update was successful')
             {
                 setName(newName)
@@ -58,8 +59,12 @@ export function Post(props){
         setModifying(false)
     }
 
-    if(deleted){
-        return
+    const getAndSetReplies = () => {
+        getReplies(id).then(response => {
+            if(response.posts){
+                setReplies(response.posts)
+            }
+        })
     }
 
     const handleClickPostTitle = (idFormReply) => {
@@ -68,16 +73,11 @@ export function Post(props){
             document.getElementById(idFormReply).style.display = 'none'
         }
         else{
-            document.getElementById(idFormReply).style.display = 'block'
-
-            getReplies(id).then(response => {
-                if(response.posts){
-                    setReplies(response.posts)
-                }
-            })
+            document.getElementById(idFormReply).style.display = 'block'     
+            getAndSetReplies()
         }
     }
-
+    
     const createNewReply = async (postName, postText, relatedPost, relatedTopic, isReply) => {
         const response = await sendPost('posts', '', '', {
             name: postName,
@@ -85,11 +85,11 @@ export function Post(props){
             relatedPost,
             isReply,
             relatedTopic
-
+            
         }, token) 
         return response
     }
-
+    
     const handleSubmitReply = (event) => {
         event.preventDefault()
         createNewReply(`Reply to ${id}`, replyText, id, relatedTopic, true).then(response => {
@@ -99,11 +99,11 @@ export function Post(props){
             }
         })
     }
-
+    
     const handleChangeReplyText = ({target}) => {
         setReplyText(target.value)
     }
-
+    
     const handleDisplayFormReply = (idFormReply) => {
         if(document.getElementById(idFormReply).style.display === 'block')
         {
@@ -113,6 +113,10 @@ export function Post(props){
             document.getElementById(idFormReply).style.display = 'block'
         }
     } 
+    
+    if(deleted){
+        return
+    }
 
     return(
         <div className="topic">
@@ -127,7 +131,6 @@ export function Post(props){
             <p>{date}</p>
 
             <div id={id} className="post-info">
-                
                 {(userId === createdBy || role !== 'client') && (<div>
                     {modifying === false && <><button className="topic-button modify" onClick={handleClickModify}>modify</button>
                     <button className="topic-button delete" onClick={handleClickDelete}>delete</button></>}
@@ -145,19 +148,19 @@ export function Post(props){
 
                 <div>
                     {replies.map((reply, index) => {
-                        const {text, username, createdAt} = reply
+                        const {text, username, createdAt, _id, name} = reply
                         const dateReply = (new Date(createdAt)).toDateString()
-                        return (<div key={index}>
-                            <hr className="hr-post"/>
-                            <p className="reply-text">{text}</p>
-                            <form>
-                                <textarea></textarea>
-                            </form>
-                            <div className="reply-extra-info">
-                                <span>{username}</span><br/>
-                                <span>{dateReply}</span>
-                            </div>
-                        </div>)
+                        const data = {
+                            userId, 
+                            createdBy, 
+                            role, 
+                            _id, 
+                            username, 
+                            dateReply, 
+                            text,
+                            name
+                        }
+                        return <Reply key={index} data={data} updatePost={updatePost} deletePost={deletePost} getAndSetReplies={getAndSetReplies}/>
                     })}
 
                     <div>

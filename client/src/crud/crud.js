@@ -3,7 +3,6 @@ import { logOut } from '../features/user/user-slice'
 
 const checkAuth =  (response) => {
     const msg = response.msg
-    console.log(msg)
     if(msg === 'Authentication invalid')
     {
         store.dispatch(logOut())
