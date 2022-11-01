@@ -14,7 +14,7 @@ const createPost = async (req, res) => {
 }
 
 const getPosts = async (req, res) => {
-    const {name, createdBy, relatedTopic, id} = req.query
+    const {name, createdBy, relatedTopic, relatedPost, id} = req.query
     const queryObject = {}
 
     if(name)
@@ -30,6 +30,11 @@ const getPosts = async (req, res) => {
     if(relatedTopic)
     {
         queryObject.relatedTopic = relatedTopic
+    }
+
+    if(relatedPost)
+    {
+        queryObject.relatedPost = relatedPost
     }
 
     if(id)
@@ -88,6 +93,8 @@ const deletePost = async (req, res) => {
     {
         throw new BadRequestError('Sorry, we could not find the post requested')
     }
+
+    await Post.deleteMany({relatedPost: id}) 
 
     res.status(StatusCodes.OK).json({msg: 'Post deleted successfully'})
 

@@ -3,7 +3,7 @@ import { useState } from 'react'
 import {selectUserInfo} from '../../user/user-slice'
 import { useSelector } from 'react-redux'
 import {sendDelete, sendUpdate} from '../../../crud/crud'
-import { Link } from 'react-router-dom'
+import {sendGet, sendPost} from '../../../crud/crud'
 
 export function Post(props){
     const {id, createdBy, userId, createdAt, username} = props 
@@ -15,6 +15,8 @@ export function Post(props){
     const date = (new Date(createdAt)).toDateString()
     const [newText, setNewText] = useState(props.text)
     const [text, setText] = useState(props.text)
+    const [replyText, setReplyText] = useState('')
+    const [replies, setReplies] = useState([])
 
     const deletePost = async (id) => {
         const response = await sendDelete('posts', id, '', token)
@@ -23,6 +25,11 @@ export function Post(props){
 
     const updateName = async (id, name, text) => {
         const response = await sendUpdate('posts', id, '', {name, text}, token)
+        return response
+    }
+
+    const getReplies = async (relatedPost = '') => {
+        const response = await sendGet('posts', '', `relatedPost=${relatedPost}`, token)
         return response
     }
 
@@ -55,14 +62,44 @@ export function Post(props){
         return
     }
 
-    const handleClickPostTitle = (id) => {
-        if(document.getElementById(id).style.display === 'block')
+    const handleClickPostTitle = (idPostText) => {
+        if(document.getElementById(idPostText).style.display === 'block')
         {
-            document.getElementById(id).style.display = 'none'
+            document.getElementById(idPostText).style.display = 'none'
         }
         else{
-            document.getElementById(id).style.display = 'block'
+            document.getElementById(idPostText).style.display = 'block'
+
+            getReplies(id).then(response => {
+                if(response.posts){
+                    setReplies(response.posts)
+                }
+            })
         }
+    }
+
+    const createNewReply = async (postName, postText, relatedPost, isReply) => {
+        const response = await sendPost('posts', '', '', {
+            name: postName,
+            text: postText,
+            relatedPost,
+            isReply
+
+        }, token) 
+        return response
+    }
+
+    const handleSubmitReply = (event) => {
+        event.preventDefault()
+        createNewReply(`Reply to ${id}`, replyText, id, true).then(response => {
+            if(response.post){
+                setReplies(prevReplies => [...prevReplies, response.post])
+            }
+        })
+    }
+
+    const handleChangeReplyText = ({target}) => {
+        setReplyText(target.value)
     }
 
     return(
@@ -73,8 +110,10 @@ export function Post(props){
                     <button className="modify confirm-edit" type="submit">Confirm changes</button>
                 </form> : 
             <button className="links-topics-posts cursor-pointer display-post-link" onClick={()=>handleClickPostTitle(id)}>{name}</button>}
+            
             <p>{username}</p>
             <p>{date}</p>
+
             <div id={id} className="post-info">
                 {(userId === createdBy || role !== 'client') && (<div>
                     {modifying === false && <><button className="topic-button modify" onClick={handleClickModify}>modify</button>
@@ -85,7 +124,23 @@ export function Post(props){
                     <form onSubmit={handleSubmitModify}>
                         <textarea className="textarea-modify-post" value={newText} onChange={({target}) => setNewText(target.value)}/>
                     </form> :
-                    <p className="post-inner-text">{text}</p>
+                    <>
+                        <div className="post-inner-text">
+                            <p>{text}</p>
+                            
+                            <div>
+                                <button>Reply</button>
+                                <form onSubmit={handleSubmitReply}>
+                                    <input value={replyText} onChange={handleChangeReplyText}/>
+                                </form>
+                            </div>
+
+                            {replies.map((reply, index) => {
+                                const {text} = reply
+                                return <p key={index}>{text}</p>
+                            })}
+                        </div>
+                    </>
                 }
             </div>
         </div>

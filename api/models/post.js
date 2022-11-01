@@ -22,7 +22,14 @@ const PostSchema = new mongoose.Schema({
     relatedTopic: {
         type: mongoose.Types.ObjectId,
         ref: 'Topic',
-        required: [true, 'Please provide a related topic id']
+    },
+    isReply: {
+        type: Boolean,
+        default: false
+    },
+    relatedPost: {
+        type: mongoose.Types.ObjectId,
+        ref: 'Post'
     }
 }, {timestamps: true})
 
