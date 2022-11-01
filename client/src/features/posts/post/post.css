@@ -36,7 +36,7 @@
 
 .reply-text{
     margin-top: 1rem;
-    font-size: 0.8rem;
+    font-size: 1rem;
     white-space: pre-wrap; 
 }
 
@@ -47,4 +47,13 @@
 
 .reply-form{
     display: none;
+}
+
+.post-text-first{
+    font-size: 1.2rem;
+}
+
+.reply-extra-info{
+    margin-top: 1rem;
+    font-size: 0.9rem;
 }

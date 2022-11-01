@@ -138,8 +138,21 @@ export function Post(props){
                     </form> :
                     <>
                         <div className="post-inner-text">
-                            <p>{text}</p>
-                            
+                            <p className="post-text-first">{text}</p>
+
+                            {replies.map((reply, index) => {
+                                const {text, username, createdAt} = reply
+                                const dateReply = (new Date(createdAt)).toDateString()
+                                return (<div key={index}>
+                                    <hr className="hr-post"/>
+                                    <p className="reply-text">{text}</p>
+                                    <div className="reply-extra-info">
+                                        <span>{username}</span><br/>
+                                        <span>{dateReply}</span>
+                                    </div>
+                                </div>)
+                            })}
+
                             <div>
                                 <button className="add-reply-button" onClick={() => handleDisplayFormReply(`${id}-form`)}>+ Add Reply</button>
                                 <form id={`${id}-form`} className="reply-form" onSubmit={handleSubmitReply}>
@@ -148,13 +161,6 @@ export function Post(props){
                                 </form>
                             </div>
 
-                            {replies.map((reply, index) => {
-                                const {text} = reply
-                                return (<div key={index}>
-                                        <hr className="hr-post"/>
-                                        <p className="reply-text">{text}</p>
-                                    </div>)
-                            })}
                         </div>
                     </>
                 }
