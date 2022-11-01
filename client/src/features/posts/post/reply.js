@@ -1,7 +1,8 @@
 import { useState } from "react"
+import { ReplyDisplay } from "./replay-display"
 
 export function Reply({data, updatePost, deletePost, getAndSetReplies}){
-    const {userId, createdBy, role, _id, username, dateReply, text, name} = data
+    const {_id, text, name} = data
     const [modifying, setModifying] = useState(false)
     const [newTextReply, setNewTextReply] = useState(text)
 
@@ -21,27 +22,13 @@ export function Reply({data, updatePost, deletePost, getAndSetReplies}){
         setModifying(false)
     }
 
-    return(<div>
-        <hr className="hr-post"/>
-
-        {!modifying && <p className="reply-text">{text}</p>}
-
-        {(userId === createdBy || role !== 'client')  && <div> {!modifying &&
-                <>
-                <button className="topic-button modify" onClick={handleClickModifyReply}>modify</button>
-                <button className="topic-button delete" onClick={handleClickDeleteReply}>delete</button></>}
-            </div>
-        }
+    return <ReplyDisplay 
+        data={{...data,
+             newTextReply, 
+             setNewTextReply, 
+             modifying}} 
         
-        {modifying && <form id={_id} onSubmit={handleSubmitModify}>
-                <textarea className="textarea-modify-post" value={newTextReply} onChange={({target}) => setNewTextReply(target.value)}/>
-                <button className="modify confirm-edit" type="submit">Confirm changes</button>
-            </form>
-        } 
-        
-        <div className="reply-extra-info">
-            <span>{username}</span><br/>
-            <span>{dateReply}</span>
-        </div>
-    </div>)
+        functions={{handleClickModifyReply,
+        handleClickDeleteReply,
+        handleSubmitModify }}/>
 }
