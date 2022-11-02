@@ -20,7 +20,7 @@ export function PostsDisplay({posts, data, functions}){
             const {_id, name, createdBy, createdAt, username, text, isReply} = post
             if(isReply)
             {
-                return
+                return null
             }
             return <Post id={_id} name={name} createdBy={createdBy} userId={userId} createdAt={createdAt} username={username} text={text} relatedTopic={relatedTopicId} key={index}/> 
         }).reverse()}

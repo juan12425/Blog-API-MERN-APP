@@ -37,6 +37,8 @@ export function DisplayPost(){
             
             }
         })
+        
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     return(<div id="display-posts">
         <h1>{postName}</h1>

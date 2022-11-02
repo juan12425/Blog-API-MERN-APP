@@ -6,7 +6,7 @@ export function Home(){
         <div>
             <div id="spotlight">
                 <div id="blog-cover-div">
-                    <img id="blog-cover" src={require('../../images/blog-cover.png')}/>
+                    <img id="blog-cover" alt="the Tech Blog" src={require('../../images/blog-cover.png')}/>
                 </div>
                 <div id="blog-description">
                     <p id="description-paragraph">This is The Tech Blog, a MERN web application.</p>

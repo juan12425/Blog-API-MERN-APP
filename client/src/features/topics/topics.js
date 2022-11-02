@@ -48,6 +48,7 @@ export function Topics(){
         getTopics().then(response => {
             setTopics(response.topics)
         })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return <TopicsDisplay topics={topics} 
