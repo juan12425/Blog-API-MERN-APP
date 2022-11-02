@@ -8,7 +8,7 @@ import { PostsDisplay } from './posts-display'
 
 export function Posts(){
     
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
     const relatedTopicId = searchParams.get("topic")
     const topicName = searchParams.get("topicname")
     const token = useSelector(selectUserInfo).token
@@ -59,6 +59,7 @@ export function Posts(){
         getPosts(relatedTopicId).then(response => {
             setPosts(response.posts)
         })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return <PostsDisplay 
