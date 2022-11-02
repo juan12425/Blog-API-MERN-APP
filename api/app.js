@@ -1,5 +1,6 @@
 require('dotenv').config()
 require('express-async-errors');
+const path = require('path');
 
 const helmet = require('helmet');
 const cors = require('cors')
@@ -28,9 +29,7 @@ app.use(helmet())
 app.use(cors())
 app.use(xss())
 
-app.get('/', (req, res) => {
-    res.send('Blog API');
-}); 
+app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/users', authMiddleware, isAdminMiddleware, userRouter)
