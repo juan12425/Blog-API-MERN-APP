@@ -51,11 +51,11 @@
 
 .post-text-first{
     font-size: 1.2rem;
+    white-space: pre-wrap;
+    line-height: 1.5;
 }
 
 .reply-extra-info{
     margin-top: 1rem;
     font-size: 0.9rem;
-    white-space: pre-wrap;
-    line-height: 1.5;
 }
