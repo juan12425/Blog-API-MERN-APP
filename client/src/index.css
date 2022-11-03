@@ -6,3 +6,26 @@
 body {
   font-family: 'Montserrat', sans-serif;
 }
+
+@media only screen and (max-width: 800px){
+  #form-div{
+    width: 95%;
+  }
+
+  #dash{
+    width: 95%;
+  }
+  #spotlight{
+    flex-wrap: wrap;
+    width: 95%;
+  }
+
+  #spotlight div{
+    width: 100%;
+  }
+
+  #blog-description{
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+}
