@@ -56,4 +56,6 @@
 .reply-extra-info{
     margin-top: 1rem;
     font-size: 0.9rem;
+    white-space: pre-wrap;
+    line-height: 1.5;
 }
