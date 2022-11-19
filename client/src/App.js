@@ -31,6 +31,7 @@ function App() {
           <Route path="/resources/log-out" element={<LogOut />}/>
           <Route path="/resources/profile" element={<Profile />}/>
         </Route>
+        <Route path="*" element={(<div>Page not Found, 404</div>)} />
       </Routes>
     </BrowserRouter>
   );
